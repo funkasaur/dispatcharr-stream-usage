@@ -1,0 +1,96 @@
+{
+  "name": "Stream Usage",
+  "version": "0.1.0",
+  "description": "Track sampled streaming traffic by user and channel.",
+  "author": "funkasaur",
+  "help_url": "https://github.com/funkasaur/dispatcharr-stream-usage",
+  "fields": [
+    {
+      "id": "poll_enabled",
+      "label": "Enable polling",
+      "type": "boolean",
+      "default": true
+    },
+    {
+      "id": "poll_seconds",
+      "label": "Poll seconds",
+      "type": "number",
+      "default": 60
+    },
+    {
+      "id": "timezone",
+      "label": "Timezone",
+      "type": "string",
+      "default": "",
+      "help_text": "IANA name, e.g. Europe/Berlin. Blank uses Dispatcharr's time zone (TIME_ZONE), else UTC."
+    },
+    {
+      "id": "hourly_days",
+      "label": "Hourly retention days",
+      "type": "number",
+      "default": 62
+    },
+    {
+      "id": "daily_days",
+      "label": "Daily retention days",
+      "type": "number",
+      "default": 400
+    },
+    {
+      "id": "top_n",
+      "label": "Top users and channels",
+      "type": "number",
+      "default": 5
+    },
+    {
+      "id": "publish_exporter",
+      "label": "Publish for Exporter",
+      "type": "boolean",
+      "default": false
+    }
+  ],
+  "actions": [
+    {
+      "id": "show_usage",
+      "label": "Show usage",
+      "button_label": "Show"
+    },
+    {
+      "id": "usage",
+      "label": "Usage API",
+      "button_label": "Get JSON"
+    },
+    {
+      "id": "status",
+      "label": "Status",
+      "button_label": "Status"
+    },
+    {
+      "id": "apply_schedule",
+      "label": "Apply schedule",
+      "button_label": "Apply"
+    },
+    {
+      "id": "reset",
+      "label": "Reset counters",
+      "button_label": "Reset",
+      "button_color": "red",
+      "confirm": {
+        "required": true,
+        "title": "Reset usage?",
+        "message": "Delete all collected stream usage history?"
+      }
+    },
+    {
+      "id": "reload_dispatcharr",
+      "label": "Reload Dispatcharr",
+      "button_label": "Reload",
+      "button_color": "orange",
+      "confirm": {
+        "required": true,
+        "title": "Reload Dispatcharr?",
+        "message": "Running plugin jobs stop and streams reconnect."
+      }
+    }
+  ]
+}
