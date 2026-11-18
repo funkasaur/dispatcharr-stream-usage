@@ -47,7 +47,7 @@ Requires Dispatcharr 0.34.0 or later (0.1.0 also ran on 0.33). Requested capabil
 |---|---|---|
 | Enable polling | on | Turns the scheduled poll on or off (press Apply schedule after changing). |
 | Poll seconds | 60 | Poll interval, 15-3600 s. |
-| Timezone | blank | IANA zone for "today" and "this month". Blank = Dispatcharr's `TIME_ZONE`, else UTC. |
+| Timezone | blank | IANA zone for "today" and "this month". Blank = Dispatcharr's System Settings time zone, else UTC. |
 | Hourly retention days | 62 | How long per-hour rows (and the hour/today/week periods) are kept. |
 | Daily retention days | 400 | How long per-day rows are kept. |
 | Top users and channels | 5 | How many users/channels the summaries and the Exporter payload list (max 100). |

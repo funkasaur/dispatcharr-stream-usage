@@ -256,6 +256,11 @@ class StreamUsageTests(unittest.TestCase):
     def test_blank_timezone_falls_back(self):
         self.assertEqual(str(mod._tz({'timezone': 'Not/AZone'})), 'UTC')
         self.assertIn(str(mod._tz({'timezone': ''})), ('UTC',))   # no Django in tests -> UTC
+        core = types.ModuleType('core'); core_models = types.ModuleType('core.models')
+        core_models.CoreSettings = type('CoreSettings', (), {'get_system_time_zone': staticmethod(lambda: 'America/New_York')})
+        with patch.dict(sys.modules, {'core': core, 'core.models': core_models}):
+            self.assertEqual(str(mod._tz({'timezone': ''})), 'America/New_York')
+            self.assertEqual(str(mod._tz({'timezone': 'Europe/Berlin'})), 'Europe/Berlin')
 
     def test_calendar_and_dst_boundaries(self):
         tz = ZoneInfo('America/Chicago')

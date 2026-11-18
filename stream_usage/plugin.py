@@ -21,7 +21,7 @@ FIELDS = [
     {'id': 'poll_enabled', 'label': 'Enable polling', 'type': 'boolean', 'default': True},
     {'id': 'poll_seconds', 'label': 'Poll seconds', 'type': 'number', 'default': 60},
     {'id': 'timezone', 'label': 'Timezone', 'type': 'string', 'default': '',
-     'help_text': 'IANA name, e.g. Europe/Berlin. Blank uses Dispatcharr\'s time zone (TIME_ZONE), else UTC.'},
+     'help_text': 'IANA name, e.g. Europe/Berlin. Blank uses Dispatcharr\'s System Settings time zone, else UTC.'},
     {'id': 'hourly_days', 'label': 'Hourly retention days', 'type': 'number', 'default': 62},
     {'id': 'daily_days', 'label': 'Daily retention days', 'type': 'number', 'default': 400},
     {'id': 'top_n', 'label': 'Top users and channels', 'type': 'number', 'default': 5},
@@ -64,11 +64,16 @@ def _size(n):
 def _tz(settings):
     name = settings.get('timezone')
     if not name:
+        # Dispatcharr keeps its System Settings zone in CoreSettings; Django's TIME_ZONE is always UTC on 0.34.
         try:
-            from django.conf import settings as django_settings
-            name = django_settings.TIME_ZONE
+            from core.models import CoreSettings
+            name = CoreSettings.get_system_time_zone()
         except Exception:
-            name = 'UTC'
+            try:
+                from django.conf import settings as django_settings
+                name = django_settings.TIME_ZONE
+            except Exception:
+                name = 'UTC'
     try:
         return ZoneInfo(name or 'UTC')
     except Exception:
@@ -378,7 +383,7 @@ def _schedule(settings):
 
 class Plugin:
     name = 'Stream Usage'
-    version = '0.2.0'
+    version = '0.2.1'
     description = 'Track sampled streaming traffic by user and channel.'
     author = 'funkasaur'
     license = 'MIT'

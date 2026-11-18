@@ -1,6 +1,6 @@
 {
   "name": "Stream Usage",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Track sampled streaming traffic by user and channel.",
   "author": "funkasaur",
   "license": "MIT",
@@ -33,7 +33,7 @@
       "label": "Timezone",
       "type": "string",
       "default": "",
-      "help_text": "IANA name, e.g. Europe/Berlin. Blank uses Dispatcharr's time zone (TIME_ZONE), else UTC."
+      "help_text": "IANA name, e.g. Europe/Berlin. Blank uses Dispatcharr's System Settings time zone, else UTC."
     },
     {
       "id": "hourly_days",
