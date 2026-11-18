@@ -378,10 +378,17 @@ def _schedule(settings):
 
 class Plugin:
     name = 'Stream Usage'
-    version = '0.1.0'
+    version = '0.2.0'
     description = 'Track sampled streaming traffic by user and channel.'
     author = 'funkasaur'
+    license = 'MIT'
     help_url = 'https://github.com/funkasaur/dispatcharr-stream-usage'
+    repo_url = 'https://github.com/funkasaur/dispatcharr-stream-usage'
+    manifest_version = 2
+    min_dispatcharr_version = 'v0.34.0'
+    # background_tasks: Celery beat poll; proxy_internals: proxy session hashes in Redis; user_data: usernames;
+    # filesystem_write: SQLite under /data/plugin_data; subprocess: pgrep for the Reload Dispatcharr action.
+    capabilities = ['background_tasks', 'proxy_internals', 'user_data', 'filesystem_write', 'subprocess']
     fields = FIELDS
     actions = ACTIONS
 

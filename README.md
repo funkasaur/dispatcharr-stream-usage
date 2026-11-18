@@ -25,12 +25,21 @@ the proxy (M3U/EPG downloads, Redirect stream profiles, backups) is not counted.
 
 ## Install
 
-1. Download `stream_usage.zip` from the [latest release](https://github.com/funkasaur/dispatcharr-stream-usage/releases),
-   or build it with `python3 build.py` (writes `dist/stream_usage.zip`).
-2. Dispatcharr → Plugins → import the ZIP, then enable **Stream Usage**.
+1. Install **Stream Usage** from the Dispatcharr plugin registry, or download `stream_usage-<version>.zip` from the
+   [latest release](https://github.com/funkasaur/dispatcharr-stream-usage/releases) and import it under
+   Dispatcharr → Plugins (build it yourself with `python3 build.py`, which writes `dist/stream_usage-<version>.zip`).
+2. Approve the requested capabilities and enable **Stream Usage**.
 3. Press **Apply schedule** (and again after changing *Poll seconds* or *Enable polling*).
 
-Tested with Dispatcharr 0.33.0 and 0.34.0.
+Requires Dispatcharr 0.34.0 or later (0.1.0 also ran on 0.33). Requested capabilities:
+
+| Capability | Why |
+|---|---|
+| Run background tasks | The poll runs on Dispatcharr's Celery beat schedule. |
+| Use live proxy internals | Reads the proxy's per-session byte counters from Redis. |
+| Access user account data | Maps session user IDs to usernames. |
+| Write outside plugin storage | Keeps its SQLite database in `/data/plugin_data/stream_usage`. |
+| Run host processes | Only the **Reload Dispatcharr** action, which finds the uwsgi process to reload. |
 
 ## Settings
 
