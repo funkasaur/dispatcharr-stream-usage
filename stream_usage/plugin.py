@@ -383,7 +383,7 @@ def _schedule(settings):
 
 class Plugin:
     name = 'Stream Usage'
-    version = '0.2.1'
+    version = '0.2.2'
     description = 'Track sampled streaming traffic by user and channel.'
     author = 'funkasaur'
     license = 'MIT'

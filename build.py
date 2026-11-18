@@ -1,7 +1,7 @@
 """Build dist/stream_usage-<version>.zip for Dispatcharr's plugin import.
 
 plugin.json is regenerated from plugin.py (name, version, fields, actions), so the manifest never drifts from the code.
-Usage: python3 build.py
+Packs plugin.py, plugin.json and logo.png. Usage: python3 build.py
 """
 import importlib.util
 import json
@@ -29,6 +29,6 @@ manifest = {"name": p.name, "version": p.version, "description": p.description, 
 out = ROOT / "dist" / f"{KEY}-{p.version}.zip"
 out.parent.mkdir(exist_ok=True)
 with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
-    for name in ("plugin.py", "plugin.json"):
+    for name in ("plugin.py", "plugin.json", "logo.png"):
         z.write(ROOT / KEY / name, f"{KEY}/{name}")
 print(f"{out.relative_to(ROOT)}  {p.name} {p.version}")
