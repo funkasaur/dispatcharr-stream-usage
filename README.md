@@ -1,10 +1,34 @@
-# Stream Usage for Dispatcharr
+<h1 align="center">Stream Usage for Dispatcharr</h1>
+
+<p align="center">Track streaming traffic by user and channel in Dispatcharr.</p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/funkasaur/dispatcharr-stream-usage"></a>
+  <a href="https://github.com/funkasaur/dispatcharr-stream-usage/commits/"><img alt="Last commit" src="https://img.shields.io/github/last-commit/funkasaur/dispatcharr-stream-usage"></a>
+  <a href="https://github.com/funkasaur/dispatcharr-stream-usage/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/funkasaur/dispatcharr-stream-usage"></a>
+</p>
+
+## Overview
 
 A [Dispatcharr](https://github.com/Dispatcharr/Dispatcharr) plugin that records how much streaming traffic your
 server moves: bytes sent to viewers (out) and bytes pulled from providers (in), by user and by channel, per hour,
 day, week and month. History is kept in a small SQLite database, so it survives restarts and container updates.
 
 Useful when a VPS plan has a bandwidth cap, or to see who and what uses the most traffic.
+
+## Features
+
+- Samples upstream and downstream byte counters.
+- Keeps aggregate history in SQLite and exposes Prometheus metrics.
+
+## Repository structure
+
+```text
+dispatcharr-stream-usage/
+├── stream_usage/  # Plugin source, manifest and logo
+├── build.py       # Versioned plugin ZIP builder
+└── tests/         # Offline unit tests
+```
 
 ## What it counts
 
